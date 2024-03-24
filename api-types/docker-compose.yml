@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  ts_generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../src/api-types:/local/out
