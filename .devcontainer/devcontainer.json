@@ -24,6 +24,11 @@
 	"containerEnv": {
 		// https://stackoverflow.com/questions/76555858/how-to-run-cypress-in-interactive-mode-in-a-devcontainer-on-windows-with-docker
 		"CHOKIDAR_USEPOLLING": "true"
+	},
+	"remoteEnv": {
+		// https://stackoverflow.com/q/65343518
+		// the original host directory which is needed for volume mount commands from inside the container (Docker in Docker)
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
 	}
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
