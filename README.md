@@ -29,9 +29,22 @@ npm run test
 
 # to re-generate TypeScript types by locally running API
 npm run generate-api-types
+```
 
-# to open Cypress
-npm run cypress:open
+## TypeScript
+
+Even though it's configured from where VSCode should get the correct version of TypeScript you also need to run the **TypeScript: Select TypeScript Version** command and select the version from `node_modules` (https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions).
+
+To run this command open any `.ts` or `.tsx` file, press `Ctrl + Shift + P` and past the command name **TypeScript: Select TypeScript Version**, press Enter, and click on the row where it could pick up the TypeScript version from `node_modules`.
+
+If you don't do that you might see some weird IDE lint errors.
+
+## Cypress
+
+If you want to work purely inside your Dev Container you have to connect the the Dev Container VNC server (remote desktop) here http://localhost:6080/. The password is `vscode`. Now you should be able to see Cypress GUI executing one of the available scripts from `package.json` e.g.
+
+```bash
+npm run cypress:open:component
 ```
 
 ## React + TypeScript + Vite (as it was created by npm create vite@latest to-dos-ui -- --template react-ts)
