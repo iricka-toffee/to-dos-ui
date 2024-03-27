@@ -6,7 +6,9 @@ export const ToDosContent = observer(() => {
   const toDosState = useContext(ToDosStateContext)
 
   return (
-    <ul>
+    <ul
+      data-cy="to-dos"
+    >
       {
         toDosState
           .toDos

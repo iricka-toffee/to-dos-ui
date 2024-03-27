@@ -22,7 +22,9 @@ export const ToDosContainer = observer(() => {
     }
 
     loadToDosAsync()
-  }, [])
+  }, [
+    toDosState.needToReloadToDos,
+  ])
 
   return (
     <ToDosContent />
