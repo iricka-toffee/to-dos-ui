@@ -155,6 +155,7 @@ module.exports = {
       {
         "ignoreChainWithDepth": 1,
       },
-    ]
+    ],
+    "react-hooks/exhaustive-deps": 0
   },
 }
