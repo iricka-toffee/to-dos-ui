@@ -1,3 +1,4 @@
+import { ToDo } from "../../../../../api-types"
 import { ToDosState } from "./ToDosState"
 
 describe(`ToDosState`, () => {
@@ -25,7 +26,7 @@ describe(`ToDosState`, () => {
       {
         name: `Second Buzz`,
       },
-    ]
+    ] as ToDo[]
 
     toDosState.initialize({
       toDos: toDosForInitialization,
