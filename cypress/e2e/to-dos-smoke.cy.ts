@@ -1,4 +1,10 @@
+import { ToDosResponse } from "../../src/api-types"
+
+const E2E_SMOKE_TODO_NAME_PREFIX = `[E2E-SMOKE]`
+
 describe(`ToDos Smoke`, () => {
+  afterEach(`Cleanup`, removeToDos)
+
   it(`
   GIVEN ToDos page
   WHEN open it
@@ -18,7 +24,7 @@ describe(`ToDos Smoke`, () => {
   `, () => {
     cy.visit(`/to-dos`)
 
-    const newToDoName = `[E2E-SMOKE] ${new Date()}`
+    const newToDoName = `${E2E_SMOKE_TODO_NAME_PREFIX} ${new Date()}`
 
     cy
       .get(`[data-cy="new-to-do-name-input"]`)
@@ -33,3 +39,30 @@ describe(`ToDos Smoke`, () => {
       .contains(newToDoName)
   })
 })
+
+function removeToDos() {
+  cy.request<ToDosResponse>({
+    method: `GET`,
+    url: `${Cypress.env(`API_URL`)}/to-dos`,
+  })
+    .then(({
+      body,
+    }) => {
+      const {
+        toDos,
+      } = body
+
+      const toDosToDelete = toDos.filter(({
+        name,
+      }) => name.startsWith(E2E_SMOKE_TODO_NAME_PREFIX))
+
+      toDosToDelete.forEach(({
+        id,
+      }) => {
+        cy.request({
+          method: `DELETE`,
+          url: `${Cypress.env(`API_URL`)}/to-dos?toDoId=${id}`,
+        })
+      })
+    })
+}
