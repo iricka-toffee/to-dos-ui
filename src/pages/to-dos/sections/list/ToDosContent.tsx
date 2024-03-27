@@ -16,6 +16,7 @@ export const ToDosContent = observer(() => {
           }) => (
             <li
               key={`to-do-${id}`}
+              data-cy="to-do"
             >
               {name}
             </li>
