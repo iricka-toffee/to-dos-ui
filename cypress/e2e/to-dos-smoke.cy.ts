@@ -3,6 +3,10 @@ import { ToDosResponse } from "../../src/api-types"
 const E2E_SMOKE_TODO_NAME_PREFIX = `[E2E-SMOKE]`
 
 describe(`ToDos Smoke`, () => {
+  // https://github.com/cypress-io/cypress/issues/25397
+  // you cannot call this cleanup before visiting the website because it's making a request to another API
+  // for some reason it causes a bug in Cypress that it cannot connect to the website, not yet addressed 
+  // beforeEach(`Cleanup`, removeToDos)
   afterEach(`Cleanup`, removeToDos)
 
   it(`
