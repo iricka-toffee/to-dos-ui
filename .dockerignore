@@ -1,0 +1,22 @@
+# root level folders
+.git
+node_modules
+.devcontainer
+.vscode
+api-types
+cypress
+
+# also ignore all component cypress tests
+src/**/*.cy.ts
+src/**/*.cy.tsx
+
+# root level files
+.dockerignore
+.eslintrc
+.gitattributes
+.gitignore
+cypress.config.ts
+Dockerfile
+global-types.d.ts
+LICENSE
+README.md
