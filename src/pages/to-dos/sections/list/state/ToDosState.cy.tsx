@@ -2,6 +2,12 @@ import { ToDo } from "../../../../../api-types"
 import { ToDosState } from "./ToDosState"
 
 describe(`ToDosState`, () => {
+  describe(`Initialization`, initializationTests)
+
+  describe(`Selection`, selectionTests)
+})
+
+function initializationTests(){
   it(`
   GIVEN initial state with no ToDos
   WHEN ask for them
@@ -37,11 +43,14 @@ describe(`ToDosState`, () => {
     expect(toDosState.toDos).to.deep.eq(toDosForInitialization)
   })
 
+}
+
+function selectionTests() {
   it(`
-  GIVEN three ToDos
-  WHEN select them one by one
-  SHOULD end up in list of selected ids
-  `, () => {
+    GIVEN three ToDos
+    WHEN select them one by one
+    SHOULD end up in list of selected ids
+    `, () => {
     const toDosForInitialization = [
       {
         id: 1,
@@ -84,7 +93,7 @@ describe(`ToDosState`, () => {
       3,
     ])
   })
-})
+}
 
 function createState({
   toDosForInitialization,
