@@ -4,6 +4,12 @@ import { ToDosState } from "./state/ToDosState"
 import { ToDosStateContext } from "./state/ToDosStateContext"
 
 describe(`ToDosContent`, () => {
+  describe(`Initialization`, initializationTests)
+
+  describe(`Selection`, selectionTests)
+})
+
+function initializationTests() {
   it(`
   GIVEN two ToDos
   WHEN render the component
@@ -23,7 +29,9 @@ describe(`ToDosContent`, () => {
     cy.contains(`First ToDo`)
     cy.contains(`Second ToDo`)
   })
+}
 
+function selectionTests() {
   it(`
   GIVEN two ToDos
   WHEN click on the 2nd of them
@@ -53,7 +61,7 @@ describe(`ToDosContent`, () => {
         expect(toDosState.selectedToDoIds).to.contains(6)
       })
   })
-})
+}
 
 function mountComponent({
   toDosForInitialization,
