@@ -61,6 +61,28 @@ function selectionTests() {
         expect(toDosState.selectedToDoIds).to.contains(6)
       })
   })
+
+  it(`
+  GIVEN two ToDos
+  WHEN render the component 
+  AND there is nothing selected
+  SHOULD see disabled Complete button
+  `, () => {
+    mountComponent({
+      toDosForInitialization: [
+        {
+          id: 10,
+        },
+        {
+          id: 11,
+        },
+      ],
+    })
+
+    cy
+      .get(`[data-cy=complete-selected-to-dos-button]`)
+      .should(`be.disabled`)
+  })
 }
 
 function mountComponent({
