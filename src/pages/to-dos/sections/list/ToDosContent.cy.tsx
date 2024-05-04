@@ -29,6 +29,42 @@ describe(`ToDosContent`, () => {
     cy.contains(`First ToDo`)
     cy.contains(`Second ToDo`)
   })
+
+  it(`
+  GIVEN two ToDos
+  WHEN click on the 2nd of them
+  SHOULD add its id to the list of selected ids
+  `, () => {
+    mountComponent()
+
+    cy
+      .get<ToDosState>(`@toDosState`)
+      .then(toDosState => {
+        toDosState.initialize({
+          toDos: [
+            {
+              id: 5,
+              name: `Fifth`,
+            },
+            {
+              id: 6,
+              name: `Sixth`,
+            },
+          ] as ToDo[],
+        })
+      })
+
+    cy
+      .get(`[data-cy="to-do"]`)
+      .contains(`Sixth`)
+      .click()
+
+    cy
+      .get<ToDosState>(`@toDosState`)
+      .should((toDosState) => {
+        expect(toDosState.selectedToDoIds).to.contains(6)
+      })
+  })
 })
 
 function mountComponent() {
