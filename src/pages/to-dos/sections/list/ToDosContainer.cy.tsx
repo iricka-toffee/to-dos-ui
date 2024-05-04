@@ -48,6 +48,7 @@ function selectionTests() {
   WHEN select both of them
   AND click Complete
   SHOULD make complete network call with the ids in the body
+  AND there is no selected ids anylonger
   `, () => {
     cy
       .intercept(
@@ -78,11 +79,21 @@ function selectionTests() {
           2,
         ],
       })
+      
+    cy
+      .get<ToDosState>(`@toDosState`)
+      .should((toDosState) => {
+        expect(toDosState.selectedToDoIds).to.deep.eq([])
+      })
   })
 }
 
 function mountComponent() {
   const toDosState = new ToDosState()
+
+  cy
+    .wrap(toDosState)
+    .as(`toDosState`)
 
   cy.mount(
     <ToDosStateContext.Provider value={toDosState}>
