@@ -93,6 +93,48 @@ function selectionTests() {
       3,
     ])
   })
+  
+  it(`
+  GIVEN two selected ToDos
+  WHEN unselect them on by one
+  SHOULD disappear from the list of selected ids
+  `, () => {
+    const toDosForInitialization = [
+      {
+        id: 1,
+      },
+      {
+        id: 2,
+      },
+    ]
+
+    const {
+      toDosState,
+    } = createState({
+      toDosForInitialization,
+    })
+
+    toDosState.toggleToDoSelection({
+      toDoId: 1,
+    })
+    toDosState.toggleToDoSelection({
+      toDoId: 2,
+    })
+
+    toDosState.toggleToDoSelection({
+      toDoId: 2,
+    })
+
+    expect(toDosState.selectedToDoIds).to.deep.eq([
+      1,
+    ])
+
+    toDosState.toggleToDoSelection({
+      toDoId: 1,
+    })
+
+    expect(toDosState.selectedToDoIds).to.deep.eq([])
+  })
 }
 
 function createState({
