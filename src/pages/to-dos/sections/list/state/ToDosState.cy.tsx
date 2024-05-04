@@ -7,7 +7,9 @@ describe(`ToDosState`, () => {
   WHEN ask for them
   SHOULD return an empty array
   `, () => {
-    const toDosState = new ToDosState()
+    const {
+      toDosState,
+    } = createState()
 
     expect(toDosState.toDos).to.deep.eq([])
   })
@@ -17,8 +19,6 @@ describe(`ToDosState`, () => {
   WHEN initialize it with two ToDos
   SHOULD return them from toDos
   `, () => {
-    const toDosState = new ToDosState()
-
     const toDosForInitialization = [
       {
         name: `First Fizz`,
@@ -26,10 +26,12 @@ describe(`ToDosState`, () => {
       {
         name: `Second Buzz`,
       },
-    ] as ToDo[]
+    ]
 
-    toDosState.initialize({
-      toDos: toDosForInitialization,
+    const {
+      toDosState,
+    } = createState({
+      toDosForInitialization,
     })
 
     expect(toDosState.toDos).to.deep.eq(toDosForInitialization)
@@ -40,8 +42,6 @@ describe(`ToDosState`, () => {
   WHEN select them one by one
   SHOULD end up in list of selected ids
   `, () => {
-    const toDosState = new ToDosState()
-
     const toDosForInitialization = [
       {
         id: 1,
@@ -52,10 +52,12 @@ describe(`ToDosState`, () => {
       {
         id: 3,
       },
-    ] as ToDo[]
+    ]
 
-    toDosState.initialize({
-      toDos: toDosForInitialization,
+    const {
+      toDosState,
+    } = createState({
+      toDosForInitialization,
     })
 
     expect(toDosState.selectedToDoIds).to.deep.eq([])
@@ -83,3 +85,21 @@ describe(`ToDosState`, () => {
     ])
   })
 })
+
+function createState({
+  toDosForInitialization,
+}: {
+  toDosForInitialization: unknown[],
+} = {
+  toDosForInitialization: [],
+}) {
+  const toDosState = new ToDosState()
+
+  toDosState.initialize({
+    toDos: toDosForInitialization as ToDo[],
+  })
+
+  return {
+    toDosState,
+  }
+}
