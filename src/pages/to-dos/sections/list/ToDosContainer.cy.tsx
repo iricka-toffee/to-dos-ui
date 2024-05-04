@@ -4,39 +4,7 @@ import { ToDosState } from "./state/ToDosState"
 import { ToDosStateContext } from "./state/ToDosStateContext"
 
 describe(`ToDosContainer`, () => {
-  it(`
-  GIVEN two ToDos from network
-  WHEN render the component
-  SHOULD see them
-  `, () => {
-    cy.intercept(
-      `GET`,
-      `*/to-dos`,
-      {
-        toDos: [
-          {
-            id: 1,
-            name: `Un`,
-          },
-          {
-            id: 2,
-            name: `Deux`,
-          },
-        ],
-      },
-    )
-
-    mountComponent()
-
-    cy.contains(`Deux`)
-  })
-
-  it(`
-  GIVEN two ToDos from network
-  WHEN select both of them
-  AND click Complete
-  SHOULD make complete network call with the ids in the body
-  `, () => {
+  beforeEach(() => {
     const toDosResponse: ToDosResponse = {
       toDos: [
         {
@@ -55,7 +23,32 @@ describe(`ToDosContainer`, () => {
       `*/to-dos`,
       toDosResponse,
     )
+  })
 
+  describe(`Initialization`, initializationTests)
+
+  describe(`Selection`, selectionTests)
+})
+
+function initializationTests() {
+  it(`
+  GIVEN two ToDos from network
+  WHEN render the component
+  SHOULD see them
+  `, () => {
+    mountComponent()
+
+    cy.contains(`Deux`)
+  })
+}
+
+function selectionTests() {
+  it(`
+  GIVEN two ToDos from network
+  WHEN select both of them
+  AND click Complete
+  SHOULD make complete network call with the ids in the body
+  `, () => {
     cy
       .intercept(
         `POST`,
@@ -86,7 +79,7 @@ describe(`ToDosContainer`, () => {
         ],
       })
   })
-})
+}
 
 function mountComponent() {
   const toDosState = new ToDosState()
