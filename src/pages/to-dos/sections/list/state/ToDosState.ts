@@ -45,6 +45,10 @@ export class ToDosState {
     }
   }
 
+  clearSelection() {
+    this._selectedToDoIds = []
+  }
+
   triggerToDosReload() {
     this._needToReloadToDos = !this._needToReloadToDos
   }
