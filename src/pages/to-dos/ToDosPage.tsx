@@ -23,7 +23,9 @@ export function ToDosPage() {
         <NewToDoContainer
           onNewToDoAdded={() => toDosState.triggerToDosReload()}
         />
-        <ToDosContainer />
+        <ToDosContainer 
+          onToDosCompleted={() => toDosState.triggerToDosReload()}
+        />
       </ToDosStateContext.Provider>
     </NewToDoStateContext.Provider>
   )

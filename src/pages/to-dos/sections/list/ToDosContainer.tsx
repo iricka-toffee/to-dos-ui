@@ -6,7 +6,11 @@ import { api } from "../../../../common/utils/HttpClient"
 import { CompleteToDosRequest, ToDosResponse } from "../../../../api-types"
 import { AxiosResponse } from "axios"
 
-export const ToDosContainer = observer(() => {
+export const ToDosContainer = observer(({
+  onToDosCompleted,
+}: {
+  onToDosCompleted: () => unknown,
+}) => {
   const toDosState = useContext(ToDosStateContext)
 
   useEffect(() => {
@@ -44,5 +48,7 @@ export const ToDosContainer = observer(() => {
         toDoIds: toDosState.selectedToDoIds,
       },
     )
+
+    onToDosCompleted()
   }
 })

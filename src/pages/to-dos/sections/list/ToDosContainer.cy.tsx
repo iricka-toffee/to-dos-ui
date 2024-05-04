@@ -86,7 +86,9 @@ function mountComponent() {
 
   cy.mount(
     <ToDosStateContext.Provider value={toDosState}>
-      <ToDosContainer />
+      <ToDosContainer 
+        onToDosCompleted={() => {}}
+      />
     </ToDosStateContext.Provider>,
   )
 }
