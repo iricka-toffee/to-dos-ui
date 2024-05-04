@@ -20,7 +20,19 @@ export const ToDosContent = observer(() => {
               key={`to-do-${id}`}
               data-cy="to-do"
             >
-              {name}
+              <input
+                id={`to-do-${id}-checkbox`}
+                type="checkbox"
+                onChange={() => toDosState.toggleToDoSelection({
+                  toDoId: id, 
+                })}
+                checked={toDosState.selectedToDoIds.includes(id)}
+              />
+              <label 
+                htmlFor={`to-do-${id}-checkbox`}
+              >
+                {name}
+              </label>
             </li>
           ))
       }
