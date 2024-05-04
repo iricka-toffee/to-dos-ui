@@ -31,6 +31,38 @@ describe(`ToDos Smoke`, () => {
       .get(`[data-cy="to-dos"]`)
       .contains(newToDoName)
   })
+
+  it(`
+  GIVEN ToDos page
+  WHEN add a new ToDo
+  AND select it
+  AND click Complete
+  SHOULD not see it in the list
+  `, () => {
+    cy.visit(`/to-dos`)
+
+    const newToDoName = `${E2E_SMOKE_TODO_NAME_PREFIX} ${new Date()}`
+
+    cy
+      .get(`[data-cy="new-to-do-name-input"]`)
+      .type(newToDoName)
+
+    cy
+      .get(`[data-cy="add-new-to-do-button"]`)
+      .click()
+
+    cy
+      .contains(newToDoName)
+      .click()
+
+    cy
+      .get(`[data-cy=complete-selected-to-dos-button]`)
+      .click()
+
+    cy
+      .contains(newToDoName)
+      .should(`not.exist`)
+  })
 })
 
 function removeToDos() {
