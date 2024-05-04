@@ -35,7 +35,14 @@ export class ToDosState {
   }: {
     toDoId: number,
   }) {
-    this._selectedToDoIds.push(toDoId)
+    const indexOfToDoIdAmongSelected = this._selectedToDoIds.indexOf(toDoId)
+
+    if (indexOfToDoIdAmongSelected === -1) {
+      this._selectedToDoIds.push(toDoId)
+    }
+    else {
+      this._selectedToDoIds.splice(indexOfToDoIdAmongSelected, 1)
+    }
   }
 
   triggerToDosReload() {
