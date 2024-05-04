@@ -135,6 +135,32 @@ function selectionTests() {
 
     expect(toDosState.selectedToDoIds).to.deep.eq([])
   })
+
+  it(`
+  GIVEN one selected ToDo
+  WHEN clear the selection
+  SHOULD return empty list of selected ids
+  `, () => {
+    const toDosForInitialization = [
+      {
+        id: 1,
+      },
+    ]
+
+    const {
+      toDosState,
+    } = createState({
+      toDosForInitialization,
+    })
+
+    toDosState.toggleToDoSelection({
+      toDoId: 1,
+    })
+
+    toDosState.clearSelection()
+
+    expect(toDosState.selectedToDoIds).to.deep.eq([])
+  })
 }
 
 function createState({
