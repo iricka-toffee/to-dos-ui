@@ -2,7 +2,11 @@ import { useContext } from "react"
 import { ToDosStateContext } from "./state/ToDosStateContext"
 import { observer } from "mobx-react-lite"
 
-export const ToDosContent = observer(() => {
+export const ToDosContent = observer(({
+  onCompleteClick,
+}: {
+  onCompleteClick: () => unknown,
+}) => {
   const toDosState = useContext(ToDosStateContext)
 
   return (
@@ -11,6 +15,7 @@ export const ToDosContent = observer(() => {
         type="button"
         data-cy="complete-selected-to-dos-button"
         disabled={toDosState.selectedToDoIds.length === 0}
+        onClick={onCompleteClick}
       >
         Complete
       </button>

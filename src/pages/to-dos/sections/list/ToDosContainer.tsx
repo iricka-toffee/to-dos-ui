@@ -3,7 +3,8 @@ import { ToDosStateContext } from "./state/ToDosStateContext"
 import { observer } from "mobx-react-lite"
 import { ToDosContent } from "./ToDosContent"
 import { api } from "../../../../common/utils/HttpClient"
-import { ToDosResponse } from "../../../../api-types"
+import { CompleteToDosRequest, ToDosResponse } from "../../../../api-types"
+import { AxiosResponse } from "axios"
 
 export const ToDosContainer = observer(() => {
   const toDosState = useContext(ToDosStateContext)
@@ -27,6 +28,21 @@ export const ToDosContainer = observer(() => {
   ])
 
   return (
-    <ToDosContent />
+    <ToDosContent
+      onCompleteClick={onCompleteSelectedToDos}
+    />
   )
+
+  async function onCompleteSelectedToDos() {
+    await api.post<
+      void,
+      AxiosResponse<void>,
+      CompleteToDosRequest
+    >(
+      `/to-dos/complete`,
+      {
+        toDoIds: toDosState.selectedToDoIds,
+      },
+    )
+  }
 })
