@@ -9,22 +9,16 @@ describe(`ToDosContent`, () => {
   WHEN render the component
   SHOULD see them
   `, () => {
-    mountComponent()
-
-    cy
-      .get<ToDosState>(`@toDosState`)
-      .then(toDosState => {
-        toDosState.initialize({
-          toDos: [
-            {
-              name: `First ToDo`,
-            },
-            {
-              name: `Second ToDo`,
-            },
-          ] as ToDo[],
-        })
-      })
+    mountComponent({
+      toDosForInitialization: [
+        {
+          name: `First ToDo`,
+        },
+        {
+          name: `Second ToDo`,
+        },
+      ],
+    })
 
     cy.contains(`First ToDo`)
     cy.contains(`Second ToDo`)
@@ -35,24 +29,18 @@ describe(`ToDosContent`, () => {
   WHEN click on the 2nd of them
   SHOULD add its id to the list of selected ids
   `, () => {
-    mountComponent()
-
-    cy
-      .get<ToDosState>(`@toDosState`)
-      .then(toDosState => {
-        toDosState.initialize({
-          toDos: [
-            {
-              id: 5,
-              name: `Fifth`,
-            },
-            {
-              id: 6,
-              name: `Sixth`,
-            },
-          ] as ToDo[],
-        })
-      })
+    mountComponent({
+      toDosForInitialization: [
+        {
+          id: 5,
+          name: `Fifth`,
+        },
+        {
+          id: 6,
+          name: `Sixth`,
+        },
+      ],
+    })
 
     cy
       .get(`[data-cy="to-do"]`)
@@ -67,8 +55,16 @@ describe(`ToDosContent`, () => {
   })
 })
 
-function mountComponent() {
+function mountComponent({
+  toDosForInitialization,
+}: {
+  toDosForInitialization: unknown[],
+}) {
   const toDosState = new ToDosState()
+  
+  toDosState.initialize({
+    toDos: toDosForInitialization as ToDo[],
+  })
 
   cy
     .wrap(toDosState)
