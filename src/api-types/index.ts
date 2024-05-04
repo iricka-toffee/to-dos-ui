@@ -25,3 +25,7 @@ export interface NewToDoRequest {
 export interface NewToDoResponse {
   newToDoId: number;
 }
+
+export interface CompleteToDosRequest {
+  toDoIds: number[];
+}
