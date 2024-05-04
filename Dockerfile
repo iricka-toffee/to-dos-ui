@@ -1,6 +1,8 @@
 FROM node:20.11.1-alpine3.19 as build
-COPY . .
+COPY package.json .
+COPY package-lock.json .
 RUN npm ci
+COPY . .
 RUN npm run build
 
 FROM nginx:1.26.0-alpine3.19-slim
