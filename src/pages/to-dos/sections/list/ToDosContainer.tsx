@@ -49,6 +49,8 @@ export const ToDosContainer = observer(({
       },
     )
 
+    toDosState.clearSelection()
+
     onToDosCompleted()
   }
 })
