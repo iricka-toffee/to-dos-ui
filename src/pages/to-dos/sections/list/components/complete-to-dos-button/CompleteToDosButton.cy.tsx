@@ -5,6 +5,8 @@ import { CompleteToDosButton } from "./CompleteToDosButton"
 
 describe(`CompleteToDosButton`, () => {
   describe(`Initialization`, initializationTests)
+
+  describe(`Selection`, selectionTests)
 })
 
 function initializationTests() {
@@ -15,6 +17,7 @@ function initializationTests() {
   `, () => {
     mountComponent({
       toDosForInitialization: [],
+      onClick: () => {},
     })
 
     cy
@@ -23,10 +26,54 @@ function initializationTests() {
   })
 }
 
+function selectionTests() {
+  it(`
+  GIVEN one of two ToDos is selected
+  WHEN click on the button
+  SHOULD call the onClick callback once
+  `, () => {
+    mountComponent({
+      toDosForInitialization: [
+        {
+          id: 10,
+        },
+        {
+          id: 11,
+        },
+      ],
+      onClick: cy
+        .spy()
+        .as(`onClickSpy`),
+    })
+
+    cy
+      .get<ToDosState>(`@toDosState`)
+      .then(toDosState => {
+        toDosState.toggleToDoSelection({
+          toDoId: 11,
+        })
+      })
+
+    cy
+      .get(`[data-cy=complete-selected-to-dos-button]`)
+      .should(`not.be.disabled`)
+            
+    cy
+      .get(`[data-cy=complete-selected-to-dos-button]`)
+      .click()
+
+    cy
+      .get(`@onClickSpy`)
+      .should(`have.been.calledOnce`)
+  })
+}
+
 function mountComponent({
   toDosForInitialization,
+  onClick,
 }: {
   toDosForInitialization: unknown[],
+  onClick: () => unknown,
 }) {
   const toDosState = new ToDosState()
   
@@ -41,7 +88,7 @@ function mountComponent({
   cy.mount(
     <ToDosStateContext.Provider value={toDosState}>
       <CompleteToDosButton
-        onClick={() => {}}
+        onClick={onClick}
       />
     </ToDosStateContext.Provider>,
   )
