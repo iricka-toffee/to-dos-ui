@@ -13,16 +13,30 @@ function initializationTests() {
   it(`
   GIVEN no ToDos
   WHEN render the component
+  AND click the button
   SHOULD see the disabled button
+  AND never call the onClick callback
   `, () => {
     mountComponent({
       toDosForInitialization: [],
-      onClick: () => {},
+      onClick: cy
+        .spy()
+        .as(`onClickSpy`),
     })
 
     cy
       .get(`[data-cy=complete-selected-to-dos-button]`)
       .should(`be.disabled`)
+      
+    cy
+      .get(`[data-cy=complete-selected-to-dos-button]`)
+      .click({
+        force: true,
+      })
+
+    cy
+      .get(`@onClickSpy`)
+      .should(`have.not.been.called`)
   })
 }
 
