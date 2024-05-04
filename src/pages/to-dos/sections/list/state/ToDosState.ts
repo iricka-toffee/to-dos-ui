@@ -4,6 +4,7 @@ import { ToDo } from '../../../../../api-types'
 export class ToDosState {
   private _toDos: ToDo[] = []
   private _needToReloadToDos: boolean = false
+  private _selectedToDoIds: number[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -21,8 +22,20 @@ export class ToDosState {
     return this._toDos
   }
 
+  get selectedToDoIds() {
+    return this._selectedToDoIds
+  }
+
   get needToReloadToDos() {
     return this._needToReloadToDos
+  }
+
+  toggleToDoSelection({
+    toDoId,
+  }: {
+    toDoId: number,
+  }) {
+    this._selectedToDoIds.push(toDoId)
   }
 
   triggerToDosReload() {
