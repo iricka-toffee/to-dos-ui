@@ -1,6 +1,7 @@
 import { ToDo } from "../../../../../../api-types"
 import { ToDosState } from "../../state/ToDosState"
 import { ToDosStateContext } from "../../state/ToDosStateContext"
+import { CompleteToDosButton } from "./CompleteToDosButton"
 
 describe(`CompleteToDosButton`, () => {
   describe(`Initialization`, initializationTests)
