@@ -24,12 +24,10 @@ function initializationTests() {
         .as(`onClickSpy`),
     })
 
-    cy
-      .get(`[data-cy=complete-selected-to-dos-button]`)
+    getButton()
       .should(`be.disabled`)
       
-    cy
-      .get(`[data-cy=complete-selected-to-dos-button]`)
+    getButton()
       .click({
         force: true,
       })
@@ -68,12 +66,10 @@ function selectionTests() {
         })
       })
 
-    cy
-      .get(`[data-cy=complete-selected-to-dos-button]`)
+    getButton()
       .should(`not.be.disabled`)
             
-    cy
-      .get(`[data-cy=complete-selected-to-dos-button]`)
+    getButton()
       .click()
 
     cy
@@ -106,4 +102,8 @@ function mountComponent({
       />
     </ToDosStateContext.Provider>,
   )
+}
+
+function getButton() {
+  return cy.get(`[data-cy=complete-selected-to-dos-button]`)
 }
