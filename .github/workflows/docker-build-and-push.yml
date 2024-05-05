@@ -47,5 +47,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: pandyz/${{ github.event.repository.name }}:latest,pandyz/${{ github.event.repository.name }}:${{ github.event.workflow_run.head_commit.id }}
+          tags: pandyz/${{ github.event.repository.name }}:latest,pandyz/${{ github.event.repository.name }}:${{ sha }}
           labels: ${{ steps.meta.outputs.labels }}
