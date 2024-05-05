@@ -39,6 +39,13 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: pandyz/${{ github.event.repository.name }}
+          tags: |
+            # minimal (short sha)
+            type=sha
+            # full length sha
+            type=sha,format=long
+            # set latest tag for default branch
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
         id: push
@@ -47,5 +54,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: pandyz/${{ github.event.repository.name }}:latest,pandyz/${{ github.event.repository.name }}:${{ sha }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
