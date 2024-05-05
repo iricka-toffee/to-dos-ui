@@ -47,5 +47,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: [latest]
+          tags: pandyz/${{ github.event.repository.name }}:latest
           labels: ${{ steps.meta.outputs.labels }}
