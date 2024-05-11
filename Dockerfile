@@ -9,4 +9,11 @@ FROM nginx:1.26.0-alpine3.19-slim
 COPY /ci/nginx.conf /data/conf/nginx.conf
 COPY --from=build /dist /usr/share/nginx/html
 EXPOSE 80
-CMD nginx -g "daemon off;" -c "/data/conf/nginx.conf"
+
+WORKDIR /usr/share/nginx/html
+COPY ./ci/env.sh .
+COPY .env-vars .
+RUN apk add --no-cache bash
+RUN chmod +x /usr/share/nginx/html/env.sh
+
+CMD /bin/bash -c "/usr/share/nginx/html/env.sh" && nginx -g "daemon off;" -c "/data/conf/nginx.conf"
