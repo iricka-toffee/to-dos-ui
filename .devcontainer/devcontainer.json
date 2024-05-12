@@ -14,6 +14,13 @@
 			"ppa": true,
 			"version": "os-provided"
 		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1.1.9": {
+			"helm": "3.14.4",
+			"minikube": "none"
+		},
+		"ghcr.io/nucleuscloud/devcontainer-features/helmfile:0.1.0": {
+			"version": "v0.158.0"
+		},
 		// https://github.com/cypress-io/cypress-documentation/issues/2956#issuecomment-1691335689
 		"ghcr.io/devcontainers/features/desktop-lite:1": {}
 	},
