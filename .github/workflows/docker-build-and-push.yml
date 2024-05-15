@@ -45,7 +45,7 @@ jobs:
             # full length sha
             type=sha,format=long
             # set latest tag for default branch
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=true
 
       - name: Build and push Docker image
         id: push
