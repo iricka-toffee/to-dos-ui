@@ -3,7 +3,7 @@
 image:
   registry: docker.io
   repository: pandyz/to-dos-ui
-  tag: "sha-cff80ef"
+  tag: "latest"
   pullPolicy: Always
   debug: true
 
