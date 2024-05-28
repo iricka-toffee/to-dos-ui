@@ -67,13 +67,8 @@ docker run -t to-dos-ui --publish 5173:80 --env VITE_API_ROOT="http://localhost:
 
 ## Helm Local
 ```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm template --debug --namespace local \
-      --values ./ci/values.yaml \
-      "to-dos-ui" \
-      bitnami/nginx --version 15.3.5
+helmfile --namespace local -f ci/helmfile.yaml template
 ```
->Note: after 15.3.5 our docker file or setup can no longer start, need to investigate what is wrong for the newer versions
 
 ## React + TypeScript + Vite (as it was created by npm create vite@latest to-dos-ui -- --template react-ts)
 
