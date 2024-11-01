@@ -25,8 +25,11 @@ If you open this project in VSCode please install Dev Containers extension and a
 # run once to install dependencies
 npm ci
 
-# to run the web site
+# to run the web site against locally running api
 npm start
+
+# to run the web site against Local Env api
+npm run start-local-env
 
 # to run linting
 npm run lint
@@ -52,6 +55,22 @@ If you want to work purely inside your Dev Container you have to connect the the
 
 ```bash
 npm run cypress:open:component
+```
+
+## Docker Build
+
+```bash
+docker build -t to-dos-ui .
+```
+
+## Docker Local Run
+```bash
+docker run -t to-dos-ui --publish 5173:80 --env VITE_API_ROOT="http://localhost:5005/to-dos-api" --rm
+```
+
+## Helm Local
+```bash
+helmfile --namespace local -f ci/helmfile.yaml template
 ```
 
 ## React + TypeScript + Vite (as it was created by npm create vite@latest to-dos-ui -- --template react-ts)
