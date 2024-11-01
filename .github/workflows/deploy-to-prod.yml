@@ -9,6 +9,8 @@ jobs:
   deploy-to-prod:
     runs-on: ubuntu-22.04
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
       - name: Create kubeconfig file
         run: |
           cd $HOME
