@@ -25,8 +25,11 @@ If you open this project in VSCode please install Dev Containers extension and a
 # run once to install dependencies
 npm ci
 
-# to run the web site
+# to run the web site against locally running api
 npm start
+
+# to run the web site against Local Env api
+npm run start-local-env
 
 # to run linting
 npm run lint
