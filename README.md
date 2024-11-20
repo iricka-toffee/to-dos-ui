@@ -3,6 +3,8 @@
 Demonstrates a Test-Driven Development approach on how to develop a React web app using MobX and Cypress.  
 It contains setup for development inside of VSCode Dev Containers (just Dev Containers from now on) or without it.
 
+More info about the project and its related repos can be found here: [to-dos-documentation](https://github.com/TourmalineCore/to-dos-documentation).
+
 ## Prerequisites
 
 - [Docker](https://www.docker.com/get-started/) (needed for Dev Containers and TypeScript types generation)
@@ -40,6 +42,18 @@ npm run test
 # to re-generate TypeScript types by locally running API
 npm run generate-api-types
 ```
+
+## Tests Execution
+
+```bash
+# to run component tests (no backend needed)
+npm run cypress:run:component
+
+# to run e2e tests against running to-dos-local-env (with real backend)
+npm run cypress:run:e2e:local-env
+```
+
+>Note: There is an issue that Cypress doesn't see Chrome from inside a Dev Container. For now you can fix it by changing `--browser chrome` in `package.json` to `--browser electron`. It needs to be fixed differently, e.g. by upgrading Cypress version and its docker image with pre-installed browser or something similar to that.
 
 ## TypeScript (VSCode only)
 
