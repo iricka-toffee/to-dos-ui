@@ -49,6 +49,9 @@ npm run generate-api-types
 # to run component tests (no backend needed)
 npm run cypress:run:component
 
+# to run e2e tests against local ui (NOT local-env one!)
+npm run cypress:run:e2e
+
 # to run e2e tests against running to-dos-local-env (with real backend)
 npm run cypress:run:e2e:local-env
 ```
