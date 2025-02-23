@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Run Tests in PR
 
 on:
   push:
@@ -6,18 +6,64 @@ on:
       - feature/*
 
 jobs:
-  cypress-run:
+  component-test:
     runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.11.1-chrome-123.0.6312.58-1-ff-124.0-edge-122.0.2365.92-1
       options: --user 1001
     steps:
-      - name: Checkout
+      - name: Checkout ui
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
+
+      - name: Cypress run component tests
         uses: cypress-io/github-action@v6
         with:
           component: true
           browser: chrome
+  
+  # this is needed to wait for the new docker image to be build and published to the registry
+  # so that we can use the image to run ui of the needed commit related version as part of local-env
+  # the idea is taken from here https://stackoverflow.com/a/71489231
+  push_to_registry:
+    uses: ./.github/workflows/docker-build-and-push.yml
+    # without this it cannot login to the registry
+    secrets: inherit
+
+  e2e-test:
+    runs-on: ubuntu-22.04
+    needs: [push_to_registry]
+    steps:
+      - name: Checkout local-env
+        uses: actions/checkout@v4
+        with:
+          repository: TourmalineCore/to-dos-local-env
+
+      - name: Deploy Local Env to Kind k8s
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
+            # we need to override "latest" image tag of ui inside local-env to run e2e against the current commit ui version and not against latest from master
+            yq -i '.image.tag = "sha-${{ github.sha }}"' deploy/values-to-dos-ui.yaml.gotmpl
+            
+            kind create cluster --name to-dos --config kind-local-config.yaml --kubeconfig ./.to-dos-cluster-kubeconfig
+            # we need to properly expose KUBECONFIG as an absolute path, pwd prints current working directory path
+            export KUBECONFIG=$(pwd)/.to-dos-cluster-kubeconfig
+
+            helmfile --environment local --namespace local -f deploy/helmfile.yaml apply
+          push: never
+          # this variable is used by local-env helmfile to use current feature branch helm chart values.yaml file
+          # this is needed for a case when as part of the feature the chart was changed and is different from master branch
+          # this should properly fill the feature branch name in spite of the pipeline trigger source (PR, commit, etc.)
+          # https://stackoverflow.com/a/71158878
+          env: |
+            TO_DOS_UI_BRANCH=${{ github.head_ref || github.ref_name }}
+      
+      - name: Checkout ui
+        uses: actions/checkout@v4
+
+      - name: Cypress run e2e tests
+        uses: cypress-io/github-action@v6
+        with:
+          wait-on: "http://localhost:40080" 
+          browser: chrome
+          config-file: cypress.config.local-env.ts
