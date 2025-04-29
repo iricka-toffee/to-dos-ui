@@ -6,7 +6,7 @@ export default defineConfig({
     baseUrl: `http://localhost:5173`,
   },
   env: {
-    API_URL: `http://localhost:5005/to-dos-api`,
+    API_URL: `http://localhost:5005/api/to-dos-api`,
   },
   component: {
     devServer: {
