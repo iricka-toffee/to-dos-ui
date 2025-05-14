@@ -10,4 +10,12 @@ export class RequestItemState {
   get description() {
     return this._description
   }
+
+  changeDescription({
+    newDescription,
+  }: {
+    newDescription: string,
+  }) {
+    this._description = newDescription
+  }
 }
