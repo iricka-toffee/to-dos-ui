@@ -10,4 +10,12 @@ export class CreateItemState {
   get type() {
     return this._type
   }
+
+  get availableTypes(): string[] {
+    return [
+      `Laptop`,
+      `PC`,
+      `Mouse`,
+    ]
+  }
 }
