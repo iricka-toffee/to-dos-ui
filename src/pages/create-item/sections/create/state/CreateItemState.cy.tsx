@@ -20,7 +20,10 @@ it(`
 
   expect(createItemState.availableTypes).to.deep.equal([
     `Laptop`,
-    `PC`,
+    `DesktopComputer`,
+    `Chair`,
+    `Monitor`,
+    `Keyboard`,
     `Mouse`,
   ])
 })
