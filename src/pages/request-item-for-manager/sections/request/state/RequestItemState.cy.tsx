@@ -1,5 +1,3 @@
-import { RequestItemState } from "./RequestItemState"
-
 it(`
   GIVEN initial state of the form
   WHEN ask for max price
