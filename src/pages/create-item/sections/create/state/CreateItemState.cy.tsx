@@ -9,4 +9,18 @@ it(`
 
   expect(сreateItemState.type).to.eq(``)
 },
-)it(`  GIVEN initial state of the form  WHEN ask for available types  SHOULD return fixed array ['Laptop', 'PC', 'Mouse']`, () => {  const createItemState = new CreateItemState()  expect(createItemState.availableTypes).to.deep.equal([    `Laptop`,    `PC`,    `Mouse`,  ])})
+)
+
+it(`
+  GIVEN initial state of the form
+  WHEN ask for available types
+  SHOULD return fixed array ['Laptop', 'PC', 'Mouse']
+`, () => {
+  const createItemState = new CreateItemState()
+
+  expect(createItemState.availableTypes).to.deep.equal([
+    `Laptop`,
+    `PC`,
+    `Mouse`,
+  ])
+})
