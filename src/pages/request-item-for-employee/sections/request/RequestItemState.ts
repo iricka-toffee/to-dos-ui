@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx'
 
-
 export class RequestItemState {
   private _description: string = ``
 
