@@ -14,7 +14,10 @@ export class CreateItemState {
   get availableTypes(): string[] {
     return [
       `Laptop`,
-      `PC`,
+      `DesktopComputer`,
+      `Chair`,
+      `Monitor`,
+      `Keyboard`,
       `Mouse`,
     ]
   }
