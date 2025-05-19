@@ -27,3 +27,15 @@ it(`
     `Mouse`,
   ])
 })
+
+describe(`CreateItemState`, () => {
+  it(`
+    GIVEN an initial state
+    WHEN setType is called with 'Laptop'
+    THEN type should be 'Laptop'
+  `, () => {
+    const state = new CreateItemState()
+    state.setType(`Laptop`)
+    expect(state.type).to.equal(`Laptop`)
+  })
+})
