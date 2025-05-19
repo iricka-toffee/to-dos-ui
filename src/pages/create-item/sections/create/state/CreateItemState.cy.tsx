@@ -14,7 +14,7 @@ it(`
 it(`
   GIVEN initial state of the form
   WHEN ask for available types
-  SHOULD return fixed array ['Laptop', 'PC', 'Mouse']
+  SHOULD return fixed array ['Laptop', 'DesktopComputer', 'Chair', 'Monitor', 'Keyboard', 'Mouse']
 `, () => {
   const createItemState = new CreateItemState()
 
