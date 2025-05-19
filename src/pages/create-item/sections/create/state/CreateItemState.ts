@@ -21,4 +21,10 @@ export class CreateItemState {
       `Mouse`,
     ]
   }
+
+  setType(value: string) {
+    if (this.availableTypes.includes(value)) {
+      this._type = value
+    }
+  }
 }
