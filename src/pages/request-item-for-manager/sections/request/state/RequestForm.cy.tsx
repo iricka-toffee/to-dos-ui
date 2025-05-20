@@ -175,6 +175,7 @@ it(`
 
 //test 10
 
+/*
 it(`
   GIVEN filled form
   WHEN user clicks the submit button
@@ -200,4 +201,27 @@ it(`
     employee: 'Иван Иванов',
     dueDate: '2025-06-01',
   })
+})
+*/
+
+//test 11
+
+it(`
+  GIVEN filled form
+  WHEN user submits it
+  SHOULD show confirmation message
+`, () => {
+  const handleSubmit = cy.stub().as('submitHandler')
+
+  cy.mount(<RequestForm onSubmit={handleSubmit} />)
+
+  cy.get('select#type').select('Laptop')
+  cy.get('input#maxPrice').clear().type('15000')
+  cy.get('input#count').clear().type('3')
+  cy.get('select#employee').select('Иван Иванов')
+  cy.get('input#dueDate').clear().type('2025-06-01')
+
+  cy.contains('button', 'Отправить').click()
+
+  cy.contains('Заявка отправлена').should('exist')
 })

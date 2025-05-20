@@ -16,6 +16,7 @@ export function RequestForm({ onSubmit }: Props) {
   const [count, setCount] = useState('')
   const [employee, setEmployee] = useState('Иван Иванов')
   const [dueDate, setDueDate] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,6 +27,7 @@ export function RequestForm({ onSubmit }: Props) {
       employee,
       dueDate,
     })
+    setIsSubmitted(true)
   }
 
   return (
@@ -80,6 +82,12 @@ export function RequestForm({ onSubmit }: Props) {
       />
 
       <button type="submit">Отправить</button>
+
+      {isSubmitted && (
+        <p style={{ textAlign: 'center', marginTop: '10px' }}>
+          Заявка отправлена
+        </p>
+      )}
     </form>
   )
 }
