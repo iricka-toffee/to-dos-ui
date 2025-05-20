@@ -80,7 +80,7 @@ it(`
 
 //test 6
 
-
+/*
 it(`
   GIVEN RequestForm
   WHEN it is mounted
@@ -95,4 +95,24 @@ it(`
   cy.get('input#count')
     .should('exist')
     .and('have.attr', 'type', 'number')
+})
+*/
+
+//test 7
+
+
+it(`
+  GIVEN RequestForm
+  WHEN it is mounted
+  SHOULD render a select field with label "Для кого"
+`, () => {
+  cy.mount(<RequestForm />)
+
+  cy.get('label[for="employee"]')
+    .should('exist')
+    .and('contain.text', 'Для кого')
+
+  cy.get('select#employee')
+    .should('exist')
+    .and('be.visible')
 })

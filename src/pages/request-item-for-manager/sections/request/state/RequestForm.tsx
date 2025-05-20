@@ -13,6 +13,9 @@ export function RequestForm() {
 
       <label htmlFor="count">Количество</label>
       <input type="number" id="count" />
+
+      <label htmlFor="employee">Для кого</label>
+      <select id="employee"></select>
     </form>
   )
 }
