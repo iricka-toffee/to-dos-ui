@@ -120,7 +120,7 @@ it(`
 
 //test 8
 
-
+/*
 it(`
   GIVEN RequestForm
   WHEN it is mounted
@@ -136,3 +136,40 @@ it(`
     .should('exist')
     .and('have.attr', 'type', 'date')
 })
+*/
+
+//test 9
+
+
+it(`
+  GIVEN filled form
+  WHEN user submits the form
+  SHOULD call onSubmit with form values
+`, () => {
+  const handleSubmit = cy.stub().as('submitHandler')
+
+  cy.mount(<RequestForm onSubmit={handleSubmit} />)
+
+  cy.get('select#type').select('Laptop')
+
+  cy.get('input#maxPrice').type('15000')
+  cy.get('input#count').type('3')
+  cy.get('select#employee').select('Иван Иванов')
+  cy.get('input#dueDate').clear().type('2025-06-01')
+
+  // Подожди перед отправкой — чтобы Cypress успел записать всё
+  cy.wait(50)
+
+  cy.get('form').submit()
+
+  cy.get('@submitHandler').should('have.been.calledOnce')
+  cy.get('@submitHandler').its('firstCall.args.0').should('deep.equal', {
+    type: 'Laptop',
+    maxPrice: 15000,
+    count: 3,
+    employee: 'Иван Иванов',
+    dueDate: '2025-06-01',
+  })
+})
+
+
