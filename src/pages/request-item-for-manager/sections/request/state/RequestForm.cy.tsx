@@ -40,7 +40,7 @@ it(`
 */
 
 //test 4
-
+/*
 it(`
   GIVEN RequestForm
   WHEN it is mounted
@@ -54,4 +54,21 @@ it(`
       const values = [...options].map((o) => o.textContent)
       expect(values).to.include.members(['Monitor', 'Laptop'])
     })
+})
+*/
+//test 5 
+it(`
+  GIVEN RequestForm
+  WHEN it is mounted
+  SHOULD render number input with label "Количество"
+`, () => {
+  cy.mount(<RequestForm />)
+
+  cy.get('label[for="count"]')
+    .should('exist')
+    .and('contain.text', 'Количество')
+
+  cy.get('input#count')
+    .should('exist')
+    .and('have.attr', 'type', 'number')
 })

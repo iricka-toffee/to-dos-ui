@@ -6,6 +6,12 @@ export function RequestForm() {
         <option>Monitor</option>
         <option>Laptop</option>
       </select>
+
+      <label htmlFor="maxPrice">Максимальная цена</label>
+      <input type="number" id="maxPrice" />
+
+      <label htmlFor="count">Количество</label>
+      <input type="number" id="count" />
     </form>
   )
 }
