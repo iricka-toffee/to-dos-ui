@@ -1,3 +1,4 @@
+
 export function RequestForm() {
   return (
     <form>
@@ -6,6 +7,9 @@ export function RequestForm() {
         <option>Monitor</option>
         <option>Laptop</option>
       </select>
+
+      <label htmlFor="maxPrice">Максимальная цена</label>
+      <input type="number" id="maxPrice" />
     </form>
   )
 }
