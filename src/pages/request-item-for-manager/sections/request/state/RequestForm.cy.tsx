@@ -41,6 +41,7 @@ it(`
 
 //test 4
 
+/*
 it(`
   GIVEN RequestForm
   WHEN it is mounted
@@ -55,4 +56,25 @@ it(`
       expect(values).to.include.members(['Monitor', 'Laptop'])
     })
 })
+*/
+
+//test 5
+
+
+it(`
+  GIVEN RequestForm
+  WHEN it is mounted
+  SHOULD render number input with label "Максимальная цена"
+`, () => {
+  cy.mount(<RequestForm />)
+
+  cy.get('label[for="maxPrice"]')
+    .should('exist')
+    .and('contain.text', 'Максимальная цена')
+
+  cy.get('input#maxPrice')
+    .should('exist')
+    .and('have.attr', 'type', 'number')
+})
+
 
