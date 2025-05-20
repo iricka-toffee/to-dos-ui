@@ -19,7 +19,6 @@ export function RequestForm({ onSubmit }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
     onSubmit({
       type,
       maxPrice: Number(maxPrice),
@@ -70,6 +69,8 @@ export function RequestForm({ onSubmit }: Props) {
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
+
+      <button type="submit">Отправить</button>
     </form>
   )
 }

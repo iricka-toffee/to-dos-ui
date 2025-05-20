@@ -140,7 +140,7 @@ it(`
 
 //test 9
 
-
+/*
 it(`
   GIVEN filled form
   WHEN user submits the form
@@ -171,5 +171,33 @@ it(`
     dueDate: '2025-06-01',
   })
 })
+*/
 
+//test 10
 
+it(`
+  GIVEN filled form
+  WHEN user clicks the submit button
+  SHOULD call onSubmit with form values
+`, () => {
+  const handleSubmit = cy.stub().as('submitHandler')
+
+  cy.mount(<RequestForm onSubmit={handleSubmit} />)
+
+  cy.get('select#type').select('Laptop')
+  cy.get('input#maxPrice').clear().type('15000')
+  cy.get('input#count').clear().type('3')
+  cy.get('select#employee').select('Иван Иванов')
+  cy.get('input#dueDate').clear().type('2025-06-01')
+
+  cy.contains('button', 'Отправить').click()
+
+  cy.get('@submitHandler').should('have.been.calledOnce')
+  cy.get('@submitHandler').its('firstCall.args.0').should('deep.equal', {
+    type: 'Laptop',
+    maxPrice: 15000,
+    count: 3,
+    employee: 'Иван Иванов',
+    dueDate: '2025-06-01',
+  })
+})
