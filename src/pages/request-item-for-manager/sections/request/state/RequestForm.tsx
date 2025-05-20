@@ -29,7 +29,16 @@ export function RequestForm({ onSubmit }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '300px',
+        margin: '40px auto',
+        gap: '12px',
+      }}
+    >
       <label htmlFor="type">Тип</label>
       <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
         <option>Monitor</option>
