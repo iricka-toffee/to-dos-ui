@@ -16,6 +16,9 @@ export function RequestForm() {
 
       <label htmlFor="employee">Для кого</label>
       <select id="employee"></select>
+
+      <label htmlFor="dueDate">Дедлайн</label>
+      <input type="date" id="dueDate" />
     </form>
   )
 }

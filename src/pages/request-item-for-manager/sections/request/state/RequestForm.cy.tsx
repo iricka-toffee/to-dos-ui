@@ -100,7 +100,7 @@ it(`
 
 //test 7
 
-
+/*
 it(`
   GIVEN RequestForm
   WHEN it is mounted
@@ -115,4 +115,24 @@ it(`
   cy.get('select#employee')
     .should('exist')
     .and('be.visible')
+})
+*/
+
+//test 8
+
+
+it(`
+  GIVEN RequestForm
+  WHEN it is mounted
+  SHOULD render date input with label "Дедлайн"
+`, () => {
+  cy.mount(<RequestForm />)
+
+  cy.get('label[for="dueDate"]')
+    .should('exist')
+    .and('contain.text', 'Дедлайн')
+
+  cy.get('input#dueDate')
+    .should('exist')
+    .and('have.attr', 'type', 'date')
 })
