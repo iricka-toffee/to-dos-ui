@@ -10,6 +10,9 @@ export function RequestForm() {
 
       <label htmlFor="maxPrice">Максимальная цена</label>
       <input type="number" id="maxPrice" />
+
+      <label htmlFor="count">Количество</label>
+      <input type="number" id="count" />
     </form>
   )
 }
