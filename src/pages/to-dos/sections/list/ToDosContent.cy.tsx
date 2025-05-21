@@ -69,7 +69,7 @@ function mountComponent({
   toDosForInitialization: unknown[],
 }) {
   const toDosState = new ToDosState()
-  
+
   toDosState.initialize({
     toDos: toDosForInitialization as ToDo[],
   })
@@ -80,8 +80,8 @@ function mountComponent({
 
   cy.mount(
     <ToDosStateContext.Provider value={toDosState}>
-      <ToDosContent 
-        onCompleteClick={() => {}}
+      <ToDosContent
+        onCompleteClick={() => { }}
       />
     </ToDosStateContext.Provider>,
   )

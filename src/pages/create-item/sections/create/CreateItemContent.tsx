@@ -11,10 +11,6 @@ export const CreateItemContent = observer(({
 }: CreateItemContent) => {
   const state = useContext(CreateItemStateContext)
 
-  if (!state) {
-    return <div>Loading...</div>
-  }
-
   const handleChange = (value: string) => {
     state.setType(value)
     onSubmitClick()
@@ -28,14 +24,24 @@ export const CreateItemContent = observer(({
         value={state.type}
         onChange={(e) => handleChange(e.target.value)}
       >
-        <option value=""
-          disabled>Select a type</option>
-        {state.availableTypes.map((type) => (
-          <option key={type}
-            value={type}>
-            {type}
-          </option>
-        ))}
+        <option
+          value=""
+          disabled
+        >
+          Select a type
+        </option>
+        {
+          state
+            .availableTypes
+            .map((type) => (
+              <option
+                key={type}
+                value={type}
+              >
+                {type}
+              </option>
+            ))
+        }
       </select>
     </div>
   )
