@@ -25,3 +25,46 @@ describe(`RequestItemState`, () => {
     expect(requestItemState.description).to.eq(`This is a test description`)
   })
 })
+it(`
+  GIVEN initial state of the form
+  WHEN change description  to null or understand
+  SHOULD set description as empty string
+`, () => {
+  const requestItemState = new RequestItemState()
+  requestItemState.changeDescription({
+    newDescription: null,
+  })
+
+  expect(requestItemState.description).to.equal(``)
+  requestItemState.changeDescription({
+    newDescription: undefined,
+  })
+  expect(requestItemState.description).to.equal(``)
+})
+
+it(`
+  GIVEN initial state of the form
+  WHEN change description multiple times
+  SHOULD keep the last value
+`, () => {
+  const requestItemState = new RequestItemState()
+  requestItemState.changeDescription({
+    newDescription: `First Desc`,
+  })
+  requestItemState.changeDescription({
+    newDescription: `Second Desc`,
+  })
+  expect(requestItemState.description).to.equal(`Second Desc`)
+})
+
+it(`
+    GIVEN initial state of the form
+    WHEN change description to empty string 
+    SHOULD correctly handle
+`, () => {
+  const requestItemState = new RequestItemState()
+  requestItemState.changeDescription({
+    newDescription: ``,
+  })
+  expect(requestItemState.description).to.equal(``)
+})
