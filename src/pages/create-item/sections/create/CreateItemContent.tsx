@@ -1,48 +1,37 @@
 import { observer } from "mobx-react-lite"
 import { useContext } from "react"
 import { CreateItemStateContext } from "./state/CreateItemStateContext"
+import { CreateItemButton } from "../list/components/create-item-button/CreateItemButton"
 
-type CreateItemContent = {
+type Props = {
   onSubmitClick: () => Promise<void>,
 }
 
 export const CreateItemContent = observer(({
   onSubmitClick,
-}: CreateItemContent) => {
+}: Props) => {
   const state = useContext(CreateItemStateContext)
 
-  const handleChange = (value: string) => {
-    state.setType(value)
-    onSubmitClick()
-  }
-
   return (
-    <div>
+    <form>
       <label htmlFor="type">Type:</label>
       <select
         id="type"
         value={state.type}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => state.setType(e.target.value)}
+        data-cy="type-select"
       >
-        <option
-          value=""
-          disabled
-        >
-          Select a type
-        </option>
-        {
-          state
-            .availableTypes
-            .map((type) => (
-              <option
-                key={type}
-                value={type}
-              >
-                {type}
-              </option>
-            ))
-        }
+        <option value=""
+          disabled>Select a type</option>
+        {state.availableTypes.map((type) => (
+          <option key={type}
+            value={type}>
+            {type}
+          </option>
+        ))}
       </select>
-    </div>
+
+      <CreateItemButton onClick={onSubmitClick} />
+    </form>
   )
 })
