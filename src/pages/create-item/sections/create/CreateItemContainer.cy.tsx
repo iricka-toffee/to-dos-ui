@@ -9,19 +9,24 @@ describe(`CreateItemContainer`, () => {
 function submissionTests() {
   it(`
   GIVEN selected type 'Laptop'
-  WHEN click Submit
+  WHEN click Create button
   SHOULD send a POST request to /items with correct payload
   `, () => {
-    // мокаем POST-запрос
     cy.intercept(`POST`, `/items`)
       .as(`createItem`)
 
     mountComponent()
 
-    // выбираем тип
     cy.get(`select`)
       .select(`Laptop`)
+    cy.get(`[data-cy="create"]`)
+      .click()
 
+    cy.wait(`@createItem`)
+      .its(`request.body`)
+      .should(`deep.equal`, {
+        type: `Laptop`,
+      })
   })
 }
 
