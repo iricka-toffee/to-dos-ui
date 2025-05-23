@@ -4,6 +4,7 @@ import { CreateItemStateContext } from "./state/CreateItemStateContext"
 
 describe(`CreateItemContent`, () => {
   describe(`Initialization`, initializationTests)
+
 })
 
 function initializationTests() {
@@ -34,7 +35,11 @@ function initializationTests() {
   })
 }
 
-function mountComponent() {
+function mountComponent({
+  onSubmitClick = () => Promise.resolve(),
+}: {
+  onSubmitClick?: () => Promise<void>,
+} = {}) {
   const state = new CreateItemState()
 
   cy.wrap(state)
@@ -42,7 +47,7 @@ function mountComponent() {
 
   cy.mount(
     <CreateItemStateContext.Provider value={state}>
-      <CreateItemContent onSubmitClick={() => Promise.resolve()} />
+      <CreateItemContent onSubmitClick={onSubmitClick} />
     </CreateItemStateContext.Provider>,
   )
 }
