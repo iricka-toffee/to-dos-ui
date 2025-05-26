@@ -32,4 +32,32 @@ export class RequestFormState {
   changeMaxPrice({ newMaxPrice }: { newMaxPrice: number | null }) {
     this._maxPrice = newMaxPrice
   }
+
+  changeCount({ newCount }: { newCount: number }) {
+    this._count = newCount
+  }
+
+  changeDueDate({ newDueDate }: { newDueDate: string | null }) {
+    this._dueDate = newDueDate
+  }
+
+  changeForWhomEmployeeId({ newForWhomEmployeeId }: { newForWhomEmployeeId: number | null }) {
+    this._forWhomEmployeeId = newForWhomEmployeeId
+  }
+
+  changeItemUrl({ newItemUrl }: { newItemUrl: string }) {
+    this._itemUrl = newItemUrl
+  }
+
+  changeShouldIBuyAtItemUrl({ newShouldIBuyAtItemUrl }: { newShouldIBuyAtItemUrl: boolean | null }) {
+    this._shouldIBuyAtItemUrl = newShouldIBuyAtItemUrl
+  }
+
+  changeSpecification({ newSpecification }: { newSpecification: string }) {
+    this._specification = newSpecification
+  }
+
+  changeDescription({ newDescription }: { newDescription: string }) {
+    this._description = newDescription
+  }
 }
