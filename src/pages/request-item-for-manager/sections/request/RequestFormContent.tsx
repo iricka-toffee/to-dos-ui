@@ -12,11 +12,21 @@ const typeOptions = [
   { value: "Mouse", label: "Mouse" },
 ]
 
-export const RequestFormContent = observer(() => {
+export const RequestFormContent = observer(({
+  onSubmit,
+}: {
+  onSubmit?: (values: { type: string }) => void,
+}) => {
   const formState = useContext(RequestFormStateContext)
 
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    onSubmit?.({ type: formState.type })
+  }
+
   return (
-    <div
+    <form
+      onSubmit={handleSubmit}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -38,6 +48,7 @@ export const RequestFormContent = observer(() => {
           <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
-    </div>
+      <button type="submit">Отправить</button>
+    </form>
   )
 })
