@@ -16,17 +16,28 @@ export const RequestFormContent = observer(() => {
   const formState = useContext(RequestFormStateContext)
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        maxWidth: 320,
+        padding: "2rem",
+        margin: "2rem auto",
+        boxSizing: "border-box",
+      }}
+    >
       <label htmlFor="type">Тип</label>
       <select
         id="type"
         value={formState.type}
         onChange={e => formState.changeType({ newType: e.target.value })}
+        style={{ fontSize: "1rem", padding: "0.5rem" }}
       >
         {typeOptions.map(opt => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
-    </>
+    </div>
   )
 })
