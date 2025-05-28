@@ -29,3 +29,13 @@ export interface NewToDoResponse {
 export interface CompleteToDosRequest {
   toDoIds: number[];
 }
+
+// --- добавлено для заявок ---
+export interface NewRequest {
+  type: string;
+}
+
+export interface NewRequestResponse {
+  newRequestId: number;
+  message: string;
+}

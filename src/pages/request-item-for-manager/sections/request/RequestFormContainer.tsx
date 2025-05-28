@@ -7,9 +7,14 @@ import { RequestFormContent } from "./RequestFormContent"
 export const RequestFormContainer = observer(() => {
   const formState = useMemo(() => new RequestFormState(), [])
 
+  function handleSubmit(values: { type: string }) {
+    // Здесь пока просто выводим значения, позже будет API
+    alert(`Заявка: ${JSON.stringify(values)}`)
+  }
+
   return (
     <RequestFormStateContext.Provider value={formState}>
-      <RequestFormContent />
+      <RequestFormContent onSubmit={handleSubmit} />
     </RequestFormStateContext.Provider>
   )
 })
