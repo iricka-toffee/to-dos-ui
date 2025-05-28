@@ -8,7 +8,7 @@ export const CreateItemContainer = observer(() => {
   const createItemState = useContext(CreateItemStateContext)
 
   const onSubmit = async () => {
-    await api.post(`/items`, {
+    await api.post(`/create-item`, {
       type: createItemState.type,
     })
   }
