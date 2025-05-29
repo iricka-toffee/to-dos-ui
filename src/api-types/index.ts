@@ -29,3 +29,11 @@ export interface NewToDoResponse {
 export interface CompleteToDosRequest {
   toDoIds: number[];
 }
+
+export interface CreateItemRequest {
+  type: string;
+}
+
+export interface CreateItemResponse {
+  newItemId: number;
+}
