@@ -10,9 +10,9 @@ function submissionTests() {
   it(`
   GIVEN selected type 'Laptop'
   WHEN click Create button
-  SHOULD send a POST request to /create-item with correct payload
+  SHOULD send a POST request to /items with correct payload
   `, () => {
-    cy.intercept(`POST`, `/api/to-dos-api/create-item`)
+    cy.intercept(`POST`, `/api/to-dos-api/items`)
       .as(`createItem`)
     mountComponent()
 
