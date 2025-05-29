@@ -31,7 +31,7 @@ ReactDOM
             element={<HomePage />}
           />
           <Route
-            path="/create-item"
+            path="/items"
             element={<CreateItemPage />}
           />
         </Routes>
