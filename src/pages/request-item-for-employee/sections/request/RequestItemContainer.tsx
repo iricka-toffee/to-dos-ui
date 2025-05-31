@@ -8,7 +8,7 @@ export const RequestItemContainer = observer(() => {
   const requestItemState = useContext(RequestItemStateContext)
 
   const onSubmit = async () => {
-    await api.post(`/request-item/requests/me`, {
+    await api.post(`/api/request-item/requests/me`, {
       description: requestItemState.description,
     })
   }

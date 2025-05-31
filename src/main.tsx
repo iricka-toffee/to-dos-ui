@@ -31,7 +31,7 @@ ReactDOM
             element={<HomePage />}
           />
           <Route
-            path="/request-item/requests/me"
+            path="/api/request-item/requests/me"
             element={<RequestItemPage />}
           />
         </Routes>
