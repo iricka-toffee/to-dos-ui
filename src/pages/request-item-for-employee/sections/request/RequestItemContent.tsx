@@ -11,7 +11,6 @@ export const RequestItemContent = observer(({ onSubmitClick }: Props) => {
 
   return (
     <div style={{ fontFamily: 'Arial', maxWidth: '600px' }}>
-      {/* Меняем <input> на <textarea> */}
       <textarea
         rows={4} // количество видимых строк (опционально)
         cols={50} // ширина области ввода (опционально)
