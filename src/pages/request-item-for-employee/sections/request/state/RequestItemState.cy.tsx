@@ -27,19 +27,17 @@ describe(`RequestItemState`, () => {
 })
 it(`
   GIVEN initial state of the form
-  WHEN change description  to null or understand
-  SHOULD set description as empty string
+  WHEN change description multiple times
+  SHOULD keep the last value
 `, () => {
   const requestItemState = new RequestItemState()
   requestItemState.changeDescription({
-    newDescription: null,
+    newDescription: `First Desc`,
   })
-
-  expect(requestItemState.description).to.equal(``)
   requestItemState.changeDescription({
-    newDescription: undefined,
+    newDescription: `Second Desc`,
   })
-  expect(requestItemState.description).to.equal(``)
+  expect(requestItemState.description).to.equal(`Second Desc`)
 })
 
 it(`
@@ -67,4 +65,18 @@ it(`
     newDescription: ``,
   })
   expect(requestItemState.description).to.equal(``)
+})
+
+it(`
+  GIVEN a very long description 
+  WHEN it is set
+  SHOULD trim or reject if longer than max allowed
+`, () => {//ограничение по тексту
+  const requestItemState = new RequestItemState()
+  const longText = "a".repeat(300)// генерится 300 "а"
+  requestItemState.changeDescription({
+    newDescription: longText
+  })
+
+  expect(requestItemState.description.length).to.be.at.most(200)//проверка, что текста в дескрипшене не должно быть больше или равно 200
 })
