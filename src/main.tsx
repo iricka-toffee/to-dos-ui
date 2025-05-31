@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/home/HomePage.tsx'
 import { ToDosPage } from './pages/to-dos/ToDosPage.tsx'
+import { RequestItemPage } from './pages/request-item-for-employee/sections/RequestItemPage.tsx'
 
 declare global {
   // this makes TS errors go away https://stackoverflow.com/a/56458070
@@ -28,6 +29,10 @@ ReactDOM
           <Route
             path="/*"
             element={<HomePage />}
+          />
+          <Route
+            path="/request-item/requests/me"
+            element={<RequestItemPage />}
           />
         </Routes>
       </BrowserRouter>
