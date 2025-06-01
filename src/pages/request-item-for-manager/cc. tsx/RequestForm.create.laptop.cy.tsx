@@ -2,8 +2,8 @@ import { RequestForm } from './RequestForm'
 
 describe('RequestForm - создание заявки Laptop', () => {
   it('должен отправлять POST-запрос и показывать сообщение об успехе', () => {
-    cy.intercept('POST', '/api/inventory-api/requests/for-employee', {
-      statusCode: 200,
+    cy.intercept('POST', '/api/request-item/requests/for-manager', {
+      statusCode: 201,
       body: {
         newRequestId: 123,
         message: 'success',

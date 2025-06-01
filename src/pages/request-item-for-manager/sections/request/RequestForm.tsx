@@ -7,7 +7,7 @@ export function RequestForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSuccessMessage(null)
-    const res = await fetch("/api/inventory-api/requests/for-employee", {
+    const res = await fetch("/api/request-item/requests/for-manager", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type }),

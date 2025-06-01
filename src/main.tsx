@@ -27,11 +27,11 @@ ReactDOM
             element={<ToDosPage />}
           />
           <Route
-            path="/request"
+            path="/api/request-item/requests/for-manager"
             element={<RequestFormContainer />}
           />
           <Route
-            path="/*"
+            path="/request"
             element={<HomePage />}
           />
         </Routes>

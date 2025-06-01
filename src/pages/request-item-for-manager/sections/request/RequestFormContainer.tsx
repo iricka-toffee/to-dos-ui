@@ -10,7 +10,7 @@ export const RequestFormContainer = observer(() => {
 
   async function handleSubmit(values: { type: string }) {
     setSuccessMessage(null)
-    const res = await fetch("/api/inventory-api/requests/for-employee", {
+    const res = await fetch("/api/request-item/requests/for-manager", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
